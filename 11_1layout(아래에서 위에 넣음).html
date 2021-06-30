@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+
+
+        class LoginBox extends React.Component{
+            state={
+                userid:'',
+                userpw:''
+            }
+
+            handleChange = (e) =>{
+
+                //e.target =>userid
+                //e.target =>password
+                //e.target =>tel
+                //비구조 할당문으로 완성
+                this.setState({ [e.target.name]:e.target.value })
+            }
+
+
+            handleSubmit = (e) =>{
+                e.preventDefault()
+                this.props.onCreate(this.state)
+                //정보를 넘겨줍미다.
+                this.setState({
+                    userid:'',
+                    userpw:''
+                })//리셋시키는 거임
+            }
+
+            render(){
+                return(
+                    <form onSubmit = {this.handleSubmit}>
+                        <input 
+                            type = "text" 
+                            placehoder="아이디를 입력해주세요."   
+                            value = {this.state.userid}//바꾸려면 onChange로 받아서 바꿔주어야한다.
+                            onChange={this.handleChange}
+                            name="userid"
+                        />
+                        <input 
+                            type = "password" 
+                            placeholder="패스워드 입력해줘라." 
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            name = "userpw" 
+                        />
+                        <button type = "submit">로그인</button> 
+                    </form>
+                )
+            }
+        }
+
+
+
+        class App extends React.Component{
+
+            loginInfo = (data)=>{
+                console.log(data)
+            }
+
+            handleCreate = (data_=>{
+                let {userid,userpw} = data
+                if( userid ==='admin' && userpw ==='admin'){
+                    this.setState({isLogin:false})
+                }
+            })
+
+
+            render(){
+                return(
+                    <>
+                    <LoginBox onCreate={this.loginInfo} />
+                    </>
+                )
+            }
+        }
+
+
+
+        ReactDOM.render(
+            <App/>,
+            document.querySelector('#root')
+        )
+    
+    </script>
+</body>
+</html>

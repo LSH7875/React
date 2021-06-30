@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <!-- react는 맨 위에것이 반드시 필요 -->
+    <!-- 밑의 것은 보여주면서 설명할 것... -->
+    <div id="root"></div>
+    <script type = "text/javascript">
+        class LoginBtn extends React.Component{
+            constructor(props){
+                super(props)
+                // 상태=>변경되는 값
+                this.state = {//이 전까지 값을 바꿀 수 없다. 고정값...
+                    //
+                    isLogin:false,
+                }
+            }
+            render(){//내 컴포넌트가 어떤 것을 보여줄 지 보여준다.
+                return(
+                    React.createElement('button',{onClick:()=>{
+                        this.setState( //값을 변경할 때는 반드시 setState써야함.
+                            {isLogin:!this.state.isLogin}
+                        )
+                    }},this.state.isLogin ? '로그아웃' : '로그인')
+                    // 이벤트 넣어줄 때 대문자 잊지 말자.
+                    // <button onClick="alert('로그인버튼입니다.')">로그인</button>
+                );
+            }
+        }//하나의 컴포넌트 기능을 하기 위한 거임...
+    // 배울 때는 class가 편하고, 쓸때는 function이 더 편함
+        
+    
+    
+    
+    ReactDOM.render(
+            React.createElement(LoginBtn),
+            document.querySelector('#root')
+        )
+        // ReactDom.render사용할 때 인잣값 2가지 받음
+        // 첫번째는 내가 넣을 내용, 두번째는 내가 넣을 위치
+    </script>
+</body>
+</html>

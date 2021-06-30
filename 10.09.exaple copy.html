@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin:0; padding:0;}
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight:300;
+}
+ul,li{
+    list-style:none;
+}
+
+.comment{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding:30px;
+    width:600px;
+    margin:0 auto;
+    
+}
+
+.comment > li{ margin-top:20px; }
+.comment > li:nth-child(1){ margin:0px;}
+
+.comment-row{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.comment-row{
+    margin-top:20px;
+    width:100%;
+}
+
+.comment-row > li:nth-child(2){
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding-left:25px;
+    z-index:1;
+    width:100%;
+}
+
+.comment-row > li:nth-child(2){
+    width:85px;
+}
+
+.comment-form > form{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.comment-form > form > h4{
+    width:100%;
+    margin:14px 0 14px 0;
+}
+
+.comment-content{
+    word-break:break-all;
+    padding-right:25px;
+}
+
+.ps_box{
+    display: block;
+    position: relative;
+    width: 80%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.ps_box > input{
+    outline:none;
+}
+
+.int{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    padding-right: 25px;
+    line-height: 29px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.btn{
+    width:18%;
+    padding: 18px 0 16px;
+    text-align: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    border:none;
+    background:#333;
+    color:#fff;
+    font-size:14px;
+}
+
+.comment-delete-btn{
+    display:inline-block;
+    margin-left:7px;
+    cursor: pointer;
+}
+
+.comment-update-input{
+    border:none;
+    border-bottom: 1px solid #333;
+    font-size:16px;
+    color:#666;
+    outline: none;
+}
+        
+        </style>
+            <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+            <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+            <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+
+
+    class ComponentForm extends React.Component{
+                    render(){
+                        return(
+                            <li className="comment-form">
+                                <form onSubmit = {this.props.onSubmit} >
+                                    <h4>댓글쓰기 <span>({this.props.length})</span></h4>
+                                    <span className="ps_box">
+                                        <input type="text" name = "comment-content" placeholder="댓글내용을 입력해주세요." class="int"/>
+                                    </span>
+                                    <input type="submit" value="등록" className="btn"/>
+                                </form>
+                            </li>
+                        )
+                    }
+                }
+
+
+        class ComponentRow extends React.Component{
+            render(){
+                return(
+                    <li>
+                        <ul className="comment-row">
+                            <li className="comment-id">{this.props.userid}</li>
+                            <li className="comment-content">{this.props.content}</li>
+                            <li className="comment-date">{this.props.date}</li>
+                        </ul>
+                    </li>
+                )
+            }
+        }
+
+
+        class CommentApp extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    comments:[
+                        {
+                            userid:'web7722',
+                            content:'안녕하세요1',
+                            date:'2021-06-30'
+                        },
+                        {
+                            userid:'web7722',
+                            content:'안녕하세요2',
+                            date:'2021-06-30'
+                        },
+                        {
+                            userid:'web7722',
+                            content:'안녕하세요3',
+                            date:'2021-06-30'
+                        },
+                    ]
+                }
+            }
+
+
+            onSubmit = (e) =>{
+                e.preventDefault()//기본적인 모션을 취소시키는 이벤트
+                console.log(e.target)//e.target  이벤트가 발생한 DOM// 지금 현재는 form element를 가르킴 form DOM
+                // console.log(e.target.querySelector('.int').value)
+                let input = e.target.querySelector('.int').value
+                let obj={
+                            userid:'web7722',
+                            content:input,
+                            date:'2021-06-30'
+                        }
+                        // this.state.commments.push(obj)
+                        let {comments} = {...this.state}//copy본 만드는 것(비구조할당문으로)
+                        //추가를 할때는 불변성의 법칙... 복사를 해서 거기에 추가해서 원본을 업데이트해라.
+                        comments.push(obj)
+                        console.log(comments)//쓴것만큼 하나 더 추가됨
+                        this.setState({comments:comments})
+                        e.target.reset()
+                        //
+
+            }
+
+            renderRow=(e)=>{
+                let {comments} = { ...this.state}
+                return(
+                    comments.map( (value,key)=>{
+                        return(
+                        
+                            <ComponentRow 
+                                key = {key}
+                                userid = {value.userid}
+                                content = {value.content}
+                                date = {value.date}
+                                />
+                        
+                        )
+                    })
+                )
+            }
+
+            render(){
+                return(
+                    <ul className="comment">
+                        <ComponentForm length = {this.state.comments.length} onSubmit = {this.onSubmit} />
+                        {this.renderRow()}
+                        
+                    </ul>
+                )
+            }
+        }
+        
+        
+        
+        
+        ReactDOM.render(
+            <CommentApp />,
+            document.querySelector('#root')
+        )
+    </script>
+
+
+</body>
+</html>
