@@ -17,6 +17,47 @@
 
     <script type="text/babel">
         class CommentList extends React.Component{
+            state={
+                content:'',
+                key:Infinity,
+            }
+
+            handleClick = (key) =>{
+                this.setState({key:key})
+            }
+
+            handleChange=(e)=>{
+                this.setState({[e.target.name]:e.target.value})
+            }
+
+            handleEnter = (e)=>{
+                if(e.key ==='Enter'){
+                    let {key,content} = {...this.state}
+                    this.props.onUpdate(key,content)
+                    this.setState({key:Infinity,content:''})
+                }
+            }
+            inputBox =(content)=>{
+                return(
+                    <input 
+                        type = "text"
+                        className="comment-update-input"
+                        dafaultValue ={content}
+                        onKeyDown={this.handleEnter}
+                        onChange={this.handleChange}
+                    />
+                )
+            }
+
+            /*dafaultValue 와 value차이
+            실제 HTML의 내용이 아니라 처음에 시작할때 보여줄 내용이 처음에 더 이어서 쓸 수 있게끔 하는것임 차이점은 만약
+            value = {thjis.state.content}이면 처음에 내용이 아무것도 안나온다. 
+            왜 안뜨냐 왜냐하면 우리가 그 전에 갖고 있었던 값이 아무것도 없는 상태이기 때문이다.
+            
+            */
+
+
+
                 //내용을 뿌리는 것에 대해서
                 //리턴값이 있을 때는 ()쓰고 상태값만 바꿔주는 거면 ()안씀.
             renderList = () => {
@@ -27,7 +68,9 @@
                                 <ul class="comment-row">
                                     <li class="comment-id">{item.userid}</li>
                                     <li class="comment-content">
-                                        {item.content}
+                                        <span onClick={()=>this.handleClick(key)}>
+                                            {key === this.state.key ? this.inputBox(item.content) : item.content}
+                                        </span>
                                         <span 
                                             className="comment-delete-btn"
                                             onClick={()=>{this.props.onDelete(key)}}
@@ -63,7 +106,6 @@
             }
 
             handleChange = (e) => {
-                
                 this.setState({[e.target.name]:e.target.value})//상태값에 저장함 댓글쓰기 부분만 렌더해줄 뿐임 그래서 효율적임
                 console.log(this.state.content)
             }
@@ -119,6 +161,14 @@
             state={
                 list:[]
             }
+
+
+            onUpdate = (index,content) =>{
+                let {list} = { ...this.state} 
+                list[index].content = content
+                this.setState({list:list}) 
+            }
+
 
             onCreate = (data) =>{ //댓글 쓸 때 사용할 함수를 미리 선언 이거는 폼에 사용하는ㄱ ㅓ임
                 console.log(data)
@@ -183,6 +233,7 @@
                         <CommentList
                             items={this.state.list}
                             onDelete= {this.onDelete}
+                            onUpdate = {this.onUpdate}
                         />
                     </CommentLayout>
                 )

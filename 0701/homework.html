@@ -26,8 +26,8 @@
                             <li key={key}>
                                 <ul class="comment-row">
                                     <li class="comment-id">{item.userid}</li>
-                                    <li class="comment-content">
-                                        {item.content}
+                                    <li class="comment-content" onClick={this.props.flagChange}>
+                                        {this.props.items.flag ? <input className="comment-update-input" value={item.content}/> : <span>{item.content}</span> }
                                         <span 
                                             className="comment-delete-btn"
                                             onClick={()=>{this.props.onDelete(key)}}
@@ -90,6 +90,7 @@
                                     name = "content"
                                     value = {this.state.content}
                                     onChange={this.handleChange}
+                                    onClick={this.changeContent}
                                 />
                                 
                             </span>
@@ -117,12 +118,13 @@
         class Comment extends React.Component{//모든 댓글 기능이 그려지는 역할
 
             state={
-                list:[]
+                list:[],
+                
             }
 
             onCreate = (data) =>{ //댓글 쓸 때 사용할 함수를 미리 선언 이거는 폼에 사용하는ㄱ ㅓ임
                 console.log(data)
-                let item = {userid:'web7722', content: data, date : '2020-07-01'}
+                let item = {userid:'web7722', content: data, date : '2020-07-01',flag : false}
                 let {list} = {...this.state}   //내 현재 state list를 복사해서 list라는 변수에 넣겠다.
                 let newList = [...list,{...item}]//새로운 변수를 선언해서 list라는 변수와 item이라는 변수를 넣겠다. 
                 //concat참조하기 불변성 참조하기 .slice() filter알아야함
@@ -147,6 +149,13 @@
 
                 this.setState({list:newList})
             }
+
+            flagChange=(e)=>{
+                console.log(e)
+                // this.state.list.flag==true? this.setState({list.flag:false}): this.setState({list.flag:true})
+            }
+
+
 
             componentDidMount(){//<생명주기> 이거 는 다 입력되었을 때 사용됨
                 let list =[
@@ -183,6 +192,7 @@
                         <CommentList
                             items={this.state.list}
                             onDelete= {this.onDelete}
+                            flagChange={this.flagChange}
                         />
                     </CommentLayout>
                 )
