@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 시간</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./example6.css">
+</head>
+<body>
+    
+    <div id="root">
+        <!--
+        <ul class="comment">
+            <li>
+                <ul class="comment-row">
+                    <li class="comment-id">web7722</li>
+                    <li class="comment-content">안녕하세요 방가</li>
+                    <li class="comment-date">20221-06-28</li>
+                </ul>
+            </li>
+            <li>
+                <ul class="comment-row">
+                    <li class="comment-id">web7722</li>
+                    <li class="comment-content">안녕하세요 방가</li>
+                    <li class="comment-date">20221-06-28</li>
+                </ul>
+            </li>
+            <li>
+                <ul class="comment-row">
+                    <li class="comment-id">web7722</li>
+                    <li class="comment-content">안녕하세요 방가</li>
+                    <li class="comment-date">20221-06-28</li>
+                </ul>
+            </li>
+            <li class="comment-form">
+                <form>
+                    <h4>댓글쓰기 <span>(3)</span></h4>
+                    <span class="ps_box">
+                        <input type="text" placeholder="댓글내용을 입력해주세요." class="int"/>
+                    </span>
+                    <input type="submit" value="등록" class="btn"/>
+                </form>
+            </li>
+        </ul>
+        -->
+    </div>
+
+    <script type="text/babel">
+        class CommentList extends React.Component{
+                //내용을 뿌리는 것에 대해서
+                //리턴값이 있을 때는 ()쓰고 상태값만 바꿔주는 거면 ()안씀.
+            renderList = () => {
+                return(
+                    this.props.items.map((item,key)=>{
+                        return (
+                            <li key={key}>
+                                <ul class="comment-row">
+                                    <li class="comment-id">{item.userid}</li>
+                                    <li class="comment-content">
+                                        {item.content}
+                                        <span 
+                                            className="comment-delete-btn"
+                                            onClick={()=>{this.props.onDelete(key)}}
+                                        >
+                                            X
+                                        </span>
+                                    </li>
+                                    <li class="comment-date">{item.date}</li>
+                                </ul>
+                            </li>
+                        )
+                    })
+
+                    //map과 foreach다른점
+                    // foreach는 반복만 해주고, 리턴값이 없음. 
+                    // map은 하나하나 요소를 다르게해서 바꾸면서 리턴을 해준다(?)
+                    
+                )
+            }
+            render(){//최상위 엘리먼트는 하나만 있어야함.
+                return(
+                    <>
+                       {this.renderList()}
+                    </>
+                )
+            }
+        }
+
+        class CommentForm extends React.Component{
+            //내용을 입력하는 것에만
+            state = {
+                content:'',
+            }
+
+            handleChange = (e) => {
+                
+                this.setState({[e.target.name]:e.target.value})//상태값에 저장함 댓글쓰기 부분만 렌더해줄 뿐임 그래서 효율적임
+                console.log(this.state.content)
+            }
+
+            handleSubmit = (e) =>{
+                e.preventDefault();
+                // let {content} = {...this.state}
+                this.props.onCreate(this.state.content)
+                this.setState({content:''})
+            }
+
+
+            render(){
+                return(
+                    //JSX=javaxcript+xml>>닫는 태그가 꼭 있어야함.
+                    <li className ="comment-form">
+                            <form onSubmit={this.handleSubmit}>
+                            <h4>댓글쓰기 <span>({this.props.count})</span></h4>
+                            <span class="ps_box">
+                                <input 
+                                    type="text" 
+                                    placeholder="댓글내용을 입력해주세요." 
+                                    className="int"
+                                    name = "content"
+                                    value = {this.state.content}
+                                    onChange={this.handleChange}
+                                />
+                                
+                            </span>
+                            <input type="submit" value="등록" className="btn"/>
+                        </form>
+                    </li>
+                )
+            }
+            //온체인지에 쓴 걸 저장하고 그 값을 다시 밸류에다가 뿌려주는 것
+            // 3을 쓰면 온체인지를 통해 핸들체인지가 일어나서 스테이트에 네임의 이름값의 항목에 3이 저장되고, 그 값이 밸류로 화면에 뿌려지는 거임.
+        }
+
+
+
+        class CommentLayout extends React.Component{
+            render(){
+                return(
+                    <ul class="comment">
+                        {this.props.children} 
+                    </ul>
+                )
+            }
+        }
+
+        class Comment extends React.Component{//모든 댓글 기능이 그려지는 역할
+
+            state={
+                list:[]
+            }
+
+            onCreate = (data) =>{ //댓글 쓸 때 사용할 함수를 미리 선언 이거는 폼에 사용하는ㄱ ㅓ임
+                console.log(data)
+                let item = {userid:'web7722', content: data, date : '2020-07-01'}
+                let {list} = {...this.state}   //내 현재 state list를 복사해서 list라는 변수에 넣겠다.
+                let newList = [...list,{...item}]//새로운 변수를 선언해서 list라는 변수와 item이라는 변수를 넣겠다. 
+                //concat참조하기 불변성 참조하기 .slice() filter알아야함
+
+                //array.map(), array.filter() 비구조할당문 중요하다. 나느느 여기서 map 이랑 filter랑 concat 이랑 slice를 알아야함.
+                this.setState({list:newList})
+                /*
+                 현재 값에서 내용을 복사한 다음에
+                 복사한 데에서 추가할 내용을 넣은 다음에 
+                 
+                 this.state.list :배열이 3개짜리에서 새로 만들 배열이 4개짜리로 변경하겠다.
+                 */
+            }
+            //{}는 jsx에서 javascript 문법을 넣을 때 사용하는 것
+
+            onDelete = (data)=>{
+                console.log(data)
+                let {list} = {...this.state} 
+                let newList = list.filter((value,index)=>{
+                    return index !== data
+                })
+
+                this.setState({list:newList})
+            }
+
+            componentDidMount(){//<생명주기> 이거 는 다 입력되었을 때 사용됨
+                let list =[
+                    {
+                        userid:'web7722',
+                        content:'안녕하세요 댓글이에요',
+                        date:'2021-07-01'
+                    },
+                    {
+                        userid:'web7722',
+                        content:'안녕하세요 댓글이에요',
+                        date:'2021-07-01'
+                    },
+                    {
+                        userid:'web7722',
+                        content:'안녕하세요 댓글이에요',
+                        date:'2021-07-01'
+                    }
+                ]
+                
+                this.setState({list:list})
+            }//얘는 컴포넌트 모든 것이 완료되었을 때(화면을 구성했을 때) 다시 한 번 실행됨. 
+            // 그래도 실행됨. 이거는 리액트에서  
+            // 한번 더 화면이 구성되고나서 setstate를 통해서 한번 더 상태를 바꾸는 것임
+            render(){
+                // console.log('render')
+                return(
+                    //합성을 사용해서 할거임
+                    <CommentLayout>
+                        <CommentForm 
+                            onCreate={this.onCreate}
+                            count = {this.state.list.length}
+                        />
+                        <CommentList
+                            items={this.state.list}
+                            onDelete= {this.onDelete}
+                        />
+                    </CommentLayout>
+                )
+            }
+        }
+
+
+
+        class App extends React.Component{
+            render(){
+                return ( 
+                    <Comment />
+                )
+            }
+        }
+
+
+        ReactDOM.render(
+            <App />,
+            document.querySelector('#root')
+        )
+        //inputbox className ="comment-update-input"
+        // 조건부 렌더링 사용하면 된다.
+    </script>
+</body>
+</html>
