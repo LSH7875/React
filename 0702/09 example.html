@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+
+    function App(){
+        let [text,setText] = React.useState('Hello world!')
+        let [text1,setText1] = React.useState('Hello 1world!')
+        let [text2,setText2] = React.useState('Hello 2world!')
+        let [list,setList]=React.useState([1,2,3])
+        // let [변수, 함수] = React.함수
+        const handleclick = e =>{//const 꼭 해줘야함.안그러면 호출이 안된다.
+            setText('바꿈')
+            setText1('바꿈1')
+            setText2('바꿈2')
+        }
+        return (
+            <>
+            <p onClick={handleclick}>{text}</p>
+            <p>{text1}</p>
+            <p>{text2}</p>
+            <p>{list}</p>
+            <p>{list[1]}</p>
+            </>
+        )
+    }
+    // class App extends React.Component{
+    //     state={
+    //             text :'hello World!',
+    //             text1 :'hello World!',
+    //             text2 :'hello World!'
+    //         }
+        
+        
+    // }
+        
+        // render(){
+        //     return(
+        //         <p>{this.state.text} 2번째 {this.state.text1}3번째:ㄴ{this.state.text2}</p>
+        //     )
+        // }
+    
+
+
+    ReactDOM.render(
+        <App/>,document.querySelector('#root')
+    )
+    
+    </script>
+</body>
+</html>

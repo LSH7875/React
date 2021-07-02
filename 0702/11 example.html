@@ -1,0 +1,98 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+
+    class App extends React.Component{
+        state={
+            userid:"",
+            userpw:'',
+            isLogin:false
+        }
+        
+        handleChange=(e)=>{
+            this.setState({
+                [e.target.name]:e.target.value
+            }
+            )}
+
+        handleSubmit = e =>{
+            e.preventDefault()
+            if(this.userid.value === 'admin' && this.userpw.value ==='admin'){
+                setIsLogin(true)
+                document.querySelector(".btn").style.background="black"
+                document.querySelector(".btn").style.color="white"
+            } else {
+                setIsLogin(false)
+            }
+
+
+        render(){
+            return(
+                <>
+                <form onSubmit = {handleSubmit}>
+                        <input tupe="text" name = "userid" onChange = {handleChange} value ={userid} /> 
+                        <input type = "tet" name = "userpw" onChange = {handleChange} value ={userpw}/>
+                        <button className="btn" type = "submit">로그인</button>
+                </form>
+                {isLogin ? '로그인이 되었습니다.' : ""}
+                    </>
+                )
+        }
+    }
+    // function App(){
+
+    //     let [userid,setUserid]= React.useState("")
+    //     let [userpw,setUserpw]= React.useState("")
+    //     let [isLogin,setIsLogin]= React.useState(false)
+
+    //     const handleChangeUserid = (e) =>{
+    //         setUserid(e.target.value)
+    //     }
+
+    //     const handleChangeUserpw = e => setUserpw(e.target.value)
+    //     const handleSubmit = e =>{
+    //         e.preventDefault()
+    //         if(userid === 'admin' && userpw ==='admin'){
+    //             setIsLogin(true)
+    //             document.querySelector(".btn").style.background="black"
+    //             document.querySelector(".btn").style.color="white"
+    //         } else {
+    //             setIsLogin(false)
+    //         }
+
+    //         setUserid('')
+    //         setUserpw('')   
+    //     }
+
+
+    //     return(
+    //         <>
+    //             <form onSubmit = {handleSubmit}>
+    //                 <input tupe="text" name = "userid" onChange = {handleChangeUserid} value ={userid} /> 
+    //                 <input type = "tet" name = "userpw" onChange = {handleChangeUserpw} value ={userpw}/>
+    //                 <button className="btn" type = "submit">로그인</button>
+    //             </form>
+    //             {isLogin ? '로그인이 되었습니다.' : ""}
+    //         </>
+    //     )
+    // }
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    
+    </script>
+</body>
+</html>

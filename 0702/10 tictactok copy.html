@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+
+       class Squere extends React.Component{
+           render(){
+               return(
+                   <button></button>
+               )
+           }
+       }
+
+        class Board extends React.Component{
+
+            state={
+                squares:Array(9).fill(null),
+                xIsNext:false,
+            }
+
+            renderSquare(n){
+            return <Square 
+                value ={this.state.squares[n]}
+                onClick = {()=>{this.handleClick(n)}}
+                />
+
+            }
+
+            handleClick= n =>{
+                let {squares} = {...this.state} 
+                squeres[m] = this.state.xIsNest ? 'O' : 'X'
+                //내가 클릭한 키 값을 알 수 있었으면 좋겟다. 
+                //squres키 값에 내용을 추가하고 싶다. 
+                ////1.squeres복사하고, 그 내용에 따라서 키 값에 내용을 넣자.
+                //내용을 추가할 때는 xinNext상태에 따라서 내요을 넣을 거다. 
+                //그리고 마지막으로 setState=>render을 다시 해야한다.
+            }
+            //인자값을 받으려면 애로우함수 써야함
+            render(){
+                return(
+                    <div className ="">
+                        <div className ="board-row">
+                            {this.renderSqure(0)}
+                            {this.renderSqure(1)}
+                            {this.renderSqure(2)}
+                        </div>
+                        <div className ="board-row">
+                            {this.renderSqure(3)}
+                            {this.renderSqure(4)}
+                            {this.renderSqure(5)}
+                        </div>
+                        <div className ="board-row">
+                            {this.renderSqure(6)}
+                            {this.renderSqure(7)}
+                            {this.renderSqure(8)}
+                        </div>
+                    </div>
+                )
+            }
+       }
+
+
+
+
+        class Game extends React.Component{
+            
+
+            render(){
+                return(
+                    <Board/>
+                )
+            }
+        }
+
+
+    ReactDOM.render(<Game/>,document.querySelector('#root'))
+    
+    </script>
+</body>
+</html>
