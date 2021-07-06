@@ -1,21 +1,10 @@
-*{
-    margin: 0; padding: 0;
+a{
+    color:blue;
+    text-decoration: none;
 }
 
 ul,li{
-    list-style: none;
-    padding: 5px;
-    margin: 5px;
+    list-style:none;
 }
 
-body{
-    background: #000;
-    color: #fff;
-}
-
-.Comp{
-    border: 3px solid blue;
-}
-
-
-
+*{margin:0; padding:0; }

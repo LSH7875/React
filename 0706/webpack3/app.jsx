@@ -1,6 +1,5 @@
 import React , {Component} from 'react'
-import FuncComp from './component/FuncComp'
-import ClassComp from './component/ClassComp' 
+import Navbar from './component/Navbar'
 
 
 
@@ -8,14 +7,7 @@ class App extends Component{
     render(){
         return(
             <>
-            <h1>Hello world!webpack3</h1>
-            <ul className = "Comp">
-                <FuncComp/>
-                <ClassComp/>
-                <FuncComp/>
-                <ClassComp/>
-
-            </ul>
+                <Navbar />
             </>
         )     
     }
