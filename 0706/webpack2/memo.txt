@@ -1,0 +1,8 @@
+npm i -D style-loader//css-loader에서 가져온 애를 style 태그안에 그 내용을 적어준다.
+npm i -D css-loader //얘가 가장 중요함
+react파일에서 css 불러올 때 그러한 능력 가질 수 있게 해주는 아이
+react page에서 import 로 CSS 파일 가져올 수 있게 해주는 애
+npm i -D mini-css-extract-plugin
+
+
+CRA...?

@@ -1,0 +1,89 @@
+웹팩이 둘 다 사용할 수 있게 변환을 해준다. 
+(변수 하나에 두가지 값을 선언해도?)
+
+모든 브라우저에서 실행이 가능하도록 변환한다.
+
+한 파일로 묶어줌보다 여러파일로 쪼갤 수 있게 되는 것에 집중하자.
++리액트를 사용할 때 컴포넌트별로 파일을 엄청 쪼개놓고 웹팩으로 합치려고 쓰는 것임.
+
+
+웹팩은 node.js환경에서 돌아간다.
+코드를 따로 쓸 건 없지만, 설정값이 많다.
+
+
+1.react 깔고 , react-dom 깔아야한다.
+2. npm i -D webpack 
+-D는 개발용도로 사용할 뿐, 실제 배포할때는 사용하지 않는다는 의미임.
+3.npm i -D webpack-cli
+
+4.webpack.config.js파일 만든다.
+
+
+Entry:내가 사용할 파일들을 가져오는 역할 파일 두개를 가르키는 내용 적어주면 된다.
+
+
+package.json에 
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"webpack"
+  },
+
+// //npm run dev로 webpack을 실행하겠다. (package.json은 주석이 되질 않는다.)
+
+
+
+npm run dev한 다음에 실행시키면 된다. html을 live서버로 열면 된다.
+
+
+react는 front단이고, 언어도 백에서 해석 안해주고, 브라우저에서 해석해줌.
+빌드를 통해서 브라우저에서 이해할 수 있는 언어로 변환시켜 주는 것임.
+바벨도 해석해줄 수 있도록 하자. ㅎㅎㅎㅎ
+
+npm i -D @babel/core
+npm i -D @babel/preset-env   //최신 문법을 옛날 문법으로 바꿔주는 아이
+npm i -D @babel/preset-react 
+
+npm i -D babel-loader 
+ //바벨과 웹팩을 연결해주는 대표적인 패키지
+
+
+ 설치목록
+npm i react
+npm i react-dom
+npm i -D webpack 
+npm i -D webpack-cli
+npm i -D @babel/core
+npm i -D @babel/preset-env 
+npm i -D @babel/preset-react
+npm i -D babel-loader 
+자동 빌드를 위한 
+npm i -D react-refresh
+//리액트 코드 고칠때 새로고침 효과
+npm i -D pmmmwh/react-refresh-webpack-plugin
+//오류나면 npm install -D @pmmmwh/react-refresh-webpack-plugin --save --legacy-peer-deps
+
+npm i -D webpack-dev-server
+
+
+
+
+
+npx webpack or npm run dev
+
+빌드를 다시 하지 않아도 다시 실행되게끔 ㅎㅎㅎ 
+
+자동으로 빌드해주는 것을 세팅하자.
+
+
+
+
+
+npm i -g create-react-app
+
+//어디서든지 react를 사용할 수 있게끔 한다.
+
+npx create-react-app reactsample
+ 
+cd reactsample
+npm start 하면 웹서버가 구동이 된다.
+리액트에 설정 다 해줌.
