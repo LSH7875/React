@@ -1,0 +1,114 @@
+
+
+.logo{
+    font-size:3rem;
+}
+
+.nav-header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.links-container{
+   height:0;
+   overflow:hidden;
+}
+
+.links-container.on{
+    height:100%;
+}
+
+
+.links{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    box-sizing:border-box;;
+}
+
+
+.links>li{
+    width:100%;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+
+
+.links >li >a {
+    /* margin:0 0.5rem; */
+    color:#000;
+    font-size:1.25rem;
+    display:inline-block;
+    padding:0.75rem;
+}
+
+.social-icons{
+    height:0;
+    overflow:hidden;
+}
+
+
+.nav-toggle{
+    font-size:2.5rem;
+    background:transparent;
+    border-color:transparent;
+}
+
+
+/* 하나의 컴포넌트를 만들때 모바일 용이랑 웹버전이랑 동시에
+만들어라 */
+/*PC CSS style*/
+@media screen and (min-width: 800px){
+    .logo{
+        font-size: 4rem;
+    }
+    .nav-toggle{
+        font-size:0;
+    }
+
+    .links-container{
+        height:auto;
+        overflow:hidden;
+     }
+
+    .nav-center{
+        max-width:1170px;
+        margin:0 auto;
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;    
+    }
+
+    .social-icons{
+        display:flex;
+        height:auto;
+    }
+
+    .social-icons >li >a{
+        margin: 0 0.5rem;
+        color:#000;
+    }
+
+    .links{
+        display:flex;
+        flex-direction:row;
+    }
+
+    .links>li{
+        width:100%;
+        text-align:center;
+        border-bottom: none;
+    }
+    
+    
+    
+    .links >li >a {
+        margin:0 0.5rem;
+        color:#000;
+        font-size:1.25rem;
+    }
+}

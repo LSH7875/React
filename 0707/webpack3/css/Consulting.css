@@ -1,0 +1,77 @@
+#ConsultingTable{
+    border-collapse: collapse;
+    width:900px;
+    margin-bottom: 20px;
+}
+
+#ConsultingTable>tr:nth-child(1)>td{
+    border-top: 1px solid blue;
+}
+
+#ConsultingTable>tr>td:first-child{
+    background-color: #efefef;
+    width:100px;
+    height:50px;
+    border-right: 1px solid gray;
+}
+input[type="text"]{
+    width:300px;
+    height:20px;
+}
+
+#ConsultingTable>tr{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+textarea{
+    width:700px;
+    height:600px;
+}
+
+#ConsultingTable>tr>td{
+    border-bottom: 1px solid gray;
+}
+
+#ConsultingTable>tr>td:nth-child(2){
+    padding-left:20px;
+    padding-top:5px;
+}
+
+#submit{
+    border-radius: 4px;
+    width:150px;
+    height:30px;
+    background-color: blue;
+    cursor:pointer;
+    color:white;
+    margin:0 auto;
+    margin-right:20px;
+}
+
+#submit:hover{
+    background-color: lightblue;
+    
+}
+
+#cancel{
+    border-radius: 4px;
+    width:150px;
+    height:30px;
+    background-color: #efefef;
+    cursor:pointer;
+    color:black;
+    margin:0 auto;
+    margin-right:20px;
+}
+
+#cancel:hover{
+    border-radius: 4px;
+    width:150px;
+    height:30px;
+    background-color: gray;
+    cursor:pointer;
+    color:white;
+    margin:0 auto;
+    margin-right:20px;
+}
