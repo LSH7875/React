@@ -33,6 +33,7 @@ class Consulting extends Component{
                         <td><textarea name = "content"></textarea></td>
                     </tr>
                 </table>
+                <br/>
                 <input type = "submit" id = "submit" value = "상담신청하기"/>
                 <input type = "button" id = "cancel" value = "취소하기"/>
             </>

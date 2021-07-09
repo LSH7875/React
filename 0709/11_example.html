@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    const useInput = (defaultValue) => {
+        const [value,setValue] = React.useState(defaultValue)
+        const onChange = e => {//이벤트를 발생시킨 아이의 정보를 갖고 있다.
+            //const { target : {value} } = e //비구조할당문//목적 :이벤트를 발생시킨 value값을 가져오는ㄱ 서
+            console.log(e)
+
+            //why const {value}=e.target으로 안하는지?
+            const value = e.target.value
+            setValue(value)//내가 적은 상태값으로 밸류값을 변경하는 행위이다. //혹시 value값이어서 setValue가 잇는건지 아닌지....
+        }
+
+        return {value,onChange} //return을 한 상태 value와 onchange함수 표현식을 담은 객체를 반환
+    }//근데 왜 onChange,가 아닌지 모르겠다.
+
+    const App = () => {
+        const user = useInput('wlgus2134')
+        const name = useInput('jihyun')
+        return(
+            <>
+                <h1>Hello hooks...</h1>
+                <input {...{'value':'asdf','type':'text','onchange':onChange()}} name='user' placeholder='아이디를 입력해주세요' />
+                <input {...name} name='name' placeholder='이름을 입력해주세요' />
+            </>
+        )
+    }
+    ReactDOM.render(
+        <App />,
+        document.querySelector('#root')
+    )
+    </script>
+</body>
+</html>

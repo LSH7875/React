@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+    
+    class App extends React.Component{
+        render(){///*JSX</>*/
+            //{}쓰는 이유: javascript 문법을 사용하겠다.
+            //태그가 실행되면서부터 nunjucks구문이 실행된다.??
+
+            //글자도 저렇게 넘길 수 있다. 굳이 state로 선언 안해도....
+            return(
+                <>
+                    <LoginBox onClick = "Login"/>
+                </>
+            )
+        }
+    }
+
+    class LoginBox extends React.Component{
+        render(){
+            return(
+                <>
+                    <Login onClick ={this.props.onClick} />
+                </>
+            )
+        }
+    }
+
+    class Login extends React.Component{
+
+        onClickHandle=(data)=>{
+            console.log(this.props.onClick,data)
+        }
+        //여기는 순수 자바스크립트 영역임 그래서 {}안쓰는 것임.
+
+        render(){
+            return(//인자값을 받는 함수를 넘겨준거임...
+                <>
+                    <Button onClick = {(i)=>{console.log(i)}}>
+                        {this.props.v}
+                    </Button>
+                </>
+            )
+        }
+    }
+
+
+    class Button extends React.Component{
+        name = "ㅎㅇ"
+        render(){
+            return (
+                <button onClick = {()=>this.props.onClick('react')}>login</button>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    
+    </script>
+</body>
+</html>

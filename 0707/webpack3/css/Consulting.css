@@ -2,6 +2,9 @@
     border-collapse: collapse;
     width:900px;
     margin-bottom: 20px;
+    margin-left:20px;
+    clear:both;
+    display:inline-block;
 }
 
 #ConsultingTable>tr:nth-child(1)>td{
@@ -45,8 +48,8 @@ textarea{
     background-color: blue;
     cursor:pointer;
     color:white;
-    margin:0 auto;
-    margin-right:20px;
+    /* margin-left:20px; */
+    display:inline-block;
 }
 
 #submit:hover{
@@ -62,7 +65,8 @@ textarea{
     cursor:pointer;
     color:black;
     margin:0 auto;
-    margin-right:20px;
+    margin-right:px;
+    display:inline-block;
 }
 
 #cancel:hover{

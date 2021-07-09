@@ -6,8 +6,9 @@
 }
 
 #name{
+    clear:both;
+    display:inline-block;
     padding-top:20px;
-    padding-left:20px;
 }
 
 .Scroll_box{

@@ -18,7 +18,7 @@ class PrivacyInfo extends Component{
                     <p>수집한다구</p>
                     <p>수집수집</p>
                 </div>
-                <input name = "agree" type = "checkbox"/>동의하지 않습니다. <input name = "agree" type = "checkbox"/> 동의합니다. 
+                <input name = "agree" type = "radio"/>동의하지 않습니다. <input name = "agree" type = "radio"/> 동의합니다. 
             </div>
             </>
         )
