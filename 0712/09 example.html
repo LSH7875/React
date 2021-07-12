@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+        class CounterFn extends React.Component{
+            state={
+                number:0
+            }
+            //console.log(11)찍어도 state에 11나옴. 왜냐하면 변수는 숫자로 시작을 못하니까 숫자값으로 인식하는 것임.
+            plusState=()=>{
+                let {number}={...this.state}//(?)
+                console.log(number);
+                number++;
+                // this.state.number=number;
+                this.setState({number});
+            }
+
+            minusState = ()=>{
+                this.setState({number:this.state.number-1})
+            }
+            render(){
+                return (
+                    <div>
+                        <h1>{this.state.number}</h1>
+                        <button onClick={this.plusState}>+1</button>
+                        <button onClick={this.minusState}>-1</button>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(
+            <CounterFn/>,
+            document.querySelector('#root')
+        )
+
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+        class CounterFn extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    number:0,
+                }
+                console.log('constructor')
+            }
+            //console.log(11)찍어도 state에 11나옴. 왜냐하면 변수는 숫자로 시작을 못하니까 숫자값으로 인식하는 것임.
+            plusState=()=>{
+                let {number}={...this.state}//(?)
+                console.log(number);
+                number++;
+                // this.state.number=number;
+                this.setState({number});
+            }
+
+            minusState = ()=>{
+                this.setState({number:this.state.number-1})
+            }
+            render(){
+                return (
+                    <div>
+                        {console.log('render')}
+                        <h1>{this.state.number}</h1>
+                        <button onClick={this.plusState}>+1</button>
+                        <button onClick={this.minusState}>-1</button>
+                    </div>
+                )
+            }
+        }
+
+//function은 render가 없다.
+// class는 constructor와 render가 실행됐는데, 함수형은 일단 모두다 실행이 된다. 그냥 실행이 되버리는 것
+// 클래스는 값이 바뀌면 render만 다시 실행되는데, 함수형은 전체 다 실행됨. 그래서
+//복잡한 계산을 할 때는 클래스보다 함수형이 느릴 수 ㅣㅇㅆ다. 그래서 useMemo가 나옴...
+        const Counter = ()=>{
+            const [number,setNumber]= React.useState(0)
+
+//왜 안정해줬는데도 안돼었지?
+            const onUp = () =>{
+                setNumber((prevNumber)=>(prevNumber+1))
+            }
+
+            const onDown=()=>{
+                // setNumber(number-1)
+                setNumber(s=>s-1)
+            }
+            console.log('함수형이지롱!!!')
+            return(
+                <div>
+                    {console.log('함수함수')}
+                    <h1>{number}</h1>
+                    <button onClick={onUp}>+1</button>
+                    <button onClick={onDown}>-1</button>
+                </div>
+            )
+        }
+
+
+        ReactDOM.render(
+            <CounterFn/>,
+            document.querySelector('#root')
+        )
+
+    
+    
+    </script>
+</body>
+</html>
