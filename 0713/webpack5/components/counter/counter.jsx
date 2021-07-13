@@ -62,4 +62,4 @@ const Counter =()=>{
         </div>
     )
 }
-export default Counter
+export default Counter //하나의 함수만 보낼 수 있음.
