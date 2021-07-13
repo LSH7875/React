@@ -22,7 +22,7 @@ const Memo=()=>{
     // }
 
 
-    const change = userCallback (e=>{
+    const change = useCallback (e=>{
         let {value} = {...e.target}
         setUsername(value)
     },[])//얘는 콘솔로그 찍을 수 있는 방법이 없긴 하다. 
