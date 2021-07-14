@@ -12,5 +12,3 @@ export const reducer = (number,action)=>{
             return number
     }
 }
-
-// export Up = 'up'//d이렇게 여러개를 export 할 수 있다. 
