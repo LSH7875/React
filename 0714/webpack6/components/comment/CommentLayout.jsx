@@ -8,6 +8,7 @@ const CommentLayout = ({children}) =>{
     const globalStore = useContext(Store)//initialstate에 있는 상태값이 여기에 넣어진다. 
     console.log('constext vlaue:',globalStore)
 
+    
 
     const [state,dispatch] = useReducer(reducer,globalStore)//globalStore은 여기서 reducer의 default값임. 
     console.log('state value :',state)
