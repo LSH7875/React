@@ -11,12 +11,11 @@ const getComment = async(dispatch)=>{
     try{
         const aaa= await fetch('http://localhost:3000/api')
         const bbb = await aaa.json()
-        
+
         dispatch({type:'GET_COMMENT_SUCCESS',payload:bbb})
         
     }catch(e){
         dispatch({type:"GET_COMMENT_FAILED",payload:e})
     }
-
 }
 export default getComment
