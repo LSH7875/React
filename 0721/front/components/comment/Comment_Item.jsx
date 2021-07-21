@@ -33,7 +33,7 @@ const Comment_Item = ({userid,content,date,index}) =>{
     return(
         <>
             <ul className = "comment-row">
-                <li className = "comment-row">{userid}</li>
+                <li className = "comment-id">{userid}</li>
                 <li className = "comment-content">
                     <span onClick={handleClick}>
                         {/* {content} */}
