@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+
+    const reducer = (state,action)=>{
+        switch(action.type){
+            case "CREATE" :
+                return{
+                    ...state,
+                }
+            case "DELETE" :
+                action.payload.filter((v,k)=>{
+
+                })
+                return {
+                    ...state,
+                }
+            default: return state
+        }
+    }
+    // let store = {content:[]}
+    
+    const CommentForm=()=>{
+        
+        
+
+        const [input,setInput]=React.useState('')
+
+
+        const handleChange=(e)=>{
+            const {value} = {...e.target}
+            setInput(value);
+
+        }
+
+        const handleSubmit =(e)=>{
+            e.preventDefault();
+            console.log('디폴트')
+            dispatch({type:"CREATE",payload:{input}})
+            console.log('이건되나')
+            setInput('')
+
+        }
+        return (
+            <>
+                <form onSubmit={handleSubmit}>
+                    <input 
+                        type="text"
+                        onChange={handleChange}/>
+                    <button type = "submit">
+                        등록
+                    </button>
+                </form>
+            </>
+        )
+    }
+
+    const CommentList=()=>{ 
+        const {state,dispatch}=React.useContext(Store)
+        console.log('여긴리스트')
+        console.log(store.content)
+        const item =store.content.map((k,v)=>{
+            return <li key={k} >{v}</li>
+        })
+        return(
+            <ul>
+                {item}
+            </ul>
+        )
+    }
+
+    const Comment=({children})=>{
+        const initialState = {
+            input:'',
+            list:[]
+        }
+
+        const [state,dispatch] = React.useReducer(reducer,initialState)
+
+        
+            return(
+                <Store.Provider value ={{state,dispatch}}>
+                    {children}
+                </Store.Provider>
+            )
+    }
+    const App=()=>{
+        //const [input,setinput] = React.useState('');
+        //const [list,setList] = React.sueState([]);
+        //위의 값을 하나로 묶음
+
+        
+        return(
+            <>
+                <CommentForm/>
+                <CommentList/>
+            </>
+        )
+    }
+
+
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    
+    
+    </script>
+</body>
+</html>

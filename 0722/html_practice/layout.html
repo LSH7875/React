@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type = "text/babel">
+    let store = {content:[]}
+    
+    const CommentForm=()=>{
+        
+        
+
+        const [input,setInput]=React.useState('')
+        const handleChange=(e)=>{
+            const {value} = {...e.target}
+            setInput(value);
+
+        }
+
+        const handleSubmit =(e)=>{
+            e.preventDefault();
+            console.log('디폴트')
+            store.content.push(input)
+            console.log('이건되나')
+            console.log(store.content)
+            setInput('')
+
+        }
+        return (
+            <>
+                <form onSubmit={handleSubmit}>
+                    <input 
+                        type="text"
+                        onChange={handleChange}/>
+                    <button type = "submit">
+                        등록
+                    </button>
+                </form>
+            </>
+        )
+    }
+
+    const CommentList=()=>{ 
+        console.log('여긴리스트')
+        console.log(store.content)
+        const item =store.content.map((k,v)=>{
+            return <li key={k} >{v}</li>
+        })
+        return(
+            <ul>
+                {item}
+            </ul>
+        )
+    }
+
+    // const Comment=({children})=>{
+    //     initialState = {
+    //         commentList=[]
+    //     }
+    //     const Store =React.CreateContext(initialState)
+    //     const {state,dispatch}=React.useContext(Store,initialState)
+    //         return(
+    //             <Store.Provider value ={{state,dispatch}}>
+    //                 {children}
+    //                 </Store.Provider>
+    //         )
+    // }
+    const App=()=>{
+        return(
+            <>
+                <CommentForm/>
+                <CommentList/>
+            </>
+        )
+    }
+
+
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    
+    
+    </script>
+</body>
+</html>
