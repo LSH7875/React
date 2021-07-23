@@ -9,7 +9,7 @@
 const getComment = async(dispatch)=>{
     dispatch({type:'GET_COMMENT'})
     try{
-        const aaa= await fetch('http://52.15.207.221/api/comment')
+        const aaa= await fetch('http://api.coding-nara.com/api/comment')
         const bbb = await aaa.json()
 
         const result = bbb.map(obj=>{
@@ -34,7 +34,7 @@ const postComment =async(dispatch,body)=>{
             body: JSON.stringify(body)
         }
 
-        const aa =await fetch('http://52.15.207.221/api/comment',options)
+        const aa =await fetch('http://api.coding-nara.com/api/comment',options)
 
         const data = await aa.json()
 
