@@ -32,9 +32,10 @@ const Gnb = Styled.ul`
 const Header = () => {
 
     const globalStore = useContext(Store) 
+    console.log('globalStore')
     console.log(globalStore)
 
-    const {IsLogin}=globalStore.state
+    const {IsLogin}=globalStore
     return (
         <HeaderContainer>
                 {/* 로고와 메뉴 */}

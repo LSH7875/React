@@ -1,11 +1,12 @@
 export const reducer =(state,action)=>{
     switch(action.type){
-        case "LoGIN":
-            return state;
+        case "LOGIN":
+            return {...state,
+                IsLogin:true}
         case "LOGOUT":
             return {
                         ...state,
-                        IsLogin:flase
+                        IsLogin:false
                     }
         case "":
             return state
