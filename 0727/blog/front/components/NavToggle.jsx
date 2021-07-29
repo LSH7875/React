@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import {useState} from 'react'
+import Accordion from './'
 
 
 const Toggle =Styled.div`
@@ -46,32 +47,7 @@ const Toggle =Styled.div`
     }
 
 `
-const Accordion = Styled.div`
-    position:absolute;
-    width:100%;
-    left:0px;
-    top:10vh;
-    z-index:5;
-    background:#fff;
-    padding:7vh 0;
 
-
-    display:${props=>(props.flag ? 'block' : 'none')};
-
-    & >ul {
-        margin-top:5vh;
-        display:flex;
-        flex-direction:column;
-    }
-
-    & >ul >li{
-        margin-top:20px;
-        text-align:center;
-    }
-
-    
-
-`
 
 //& : 자기자신
 //단점: 자동완성이 안됨+색상이 안보여서 오타 찾기 힘듦 및 
