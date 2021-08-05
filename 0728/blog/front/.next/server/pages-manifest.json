@@ -2,5 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/user/join": "pages/user/join.js"
+  "/posts/[post]": "pages/posts/[post].js"
 }
