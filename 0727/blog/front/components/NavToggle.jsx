@@ -1,6 +1,6 @@
 import Styled from 'styled-components'
 import {useState} from 'react'
-import Accordion from './'
+import Accordion from './layout/Header'
 
 
 const Toggle =Styled.div`
