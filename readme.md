@@ -27,3 +27,6 @@
 
 ## 0726
 >Next.js 레이아웃/ 동적라우팅조금배움/ 링크걸기
+
+## 0827
+>NEXT.js + Redux Saga + getServerSideProps
